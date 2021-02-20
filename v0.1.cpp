@@ -114,6 +114,7 @@ int main()
                 }
             }
             else{
+                cout<<"Iveskite pazymius: ";
                 for(int i=0; i<pazsk; i++){
                 cin>>pazymys;
                 studentas.pazymiai.push_back(pazymys);
