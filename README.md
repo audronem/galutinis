@@ -2,6 +2,8 @@
 #### Programos veikimas
 Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzamino rezultatą, apskaičiuojami galutiniai balai.
 ##
+#### Versijos
+- [v0.1](https://github.com/audronem/galutinis/tree/v0.1)
 #### Programos įdiegimas ir naudojimas
 1. Iš "Releases" atsisiųskite norimą programos versiją.
 2. Išarchyvuokite failus.
