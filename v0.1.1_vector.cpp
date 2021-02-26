@@ -90,7 +90,6 @@ int main()
 {
     vector<studentoinfo> studentai;
     studentoinfo studentas;
-    bool skaiciuotimedianas, skaiciuotividurki;
     int pazymys;
     int pazsk;
     bool baigta=false;
@@ -103,6 +102,10 @@ int main()
     if(klausimas("Ar pazymiu skaicius yra zinomas?")){
             cout<<"Iveskite pazymiu skaiciu: ";
             cin>>pazsk;
+            while(pazsk<=0){
+            cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
+            cin>>pazsk;
+            }
             if(klausimas("Ar generuoti atsitiktinius pazymius?")){
                 for(int i=0; i<pazsk; i++){
                     pazymys=generuotiatsitiktini(pmin, pmax);
@@ -113,7 +116,13 @@ int main()
                 cout<<"Iveskite pazymius: ";
                 for(int i=0; i<pazsk; i++){
                 cin>>pazymys;
-                studentas.pazymiai.push_back(pazymys);
+                if(pazymys>pmax||pazymys<pmin){
+                cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
+                cin>>pazymys;
+                }
+                else{
+                    studentas.pazymiai.push_back(pazymys);
+                }
                 }
             }
             }
@@ -124,6 +133,10 @@ int main()
             if(pazymys==0){
                 inputend=true;
                 break;
+            }
+            else if(pazymys>pmax||pazymys<pmin){
+                cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
+                cin>>pazymys;
             }
             else{
                 studentas.pazymiai.push_back(pazymys);
