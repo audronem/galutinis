@@ -4,6 +4,7 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 ##
 #### Versijos
 - [v0.1](https://github.com/audronem/galutinis/tree/v0.1)
+- [v0.1.1](https://github.com/audronem/galutinis/tree/v0.1.1)
 #### Programos įdiegimas ir naudojimas
 1. Iš "Releases" atsisiųskite norimą programos versiją.
 2. Išarchyvuokite failus.
