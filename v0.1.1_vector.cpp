@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <random>
+#include <vector>
 
 using namespace std;
 
