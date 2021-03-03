@@ -19,13 +19,6 @@ struct studentoinfo{
     int *P;
 };
 
-void vardaspavarde(studentoinfo S){
-    cout<<"Iveskite varda: ";
-    cin>>S.vardas;
-    cout<<"Iveskite pavarde: ";
-    cin>>S.pavarde;
-}
-
 bool klausimas(string kl){
     string t="taip", n="ne", ats;
     cout<<kl<<" | "<<t<<"/"<<n<<endl;
