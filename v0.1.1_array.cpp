@@ -30,7 +30,8 @@ bool klausimas(string kl){
         return false;
     }
     else{
-        cout<<"Klaidinga ivestis.";
+        cout<<"Klaidinga ivestis. Bandykite dar karta"<<endl;
+        cin>>ats;
     }
 }
 
@@ -66,24 +67,26 @@ double rastimediana(int* A, int dydis){
     return (double(A[(dydis-1)/2]+A[dydis/2])/2.0);
 }
 
-void skaiciavimas(studentoinfo* S, int dydis){
-    S->vid=0;
-    S->gal=0;
-    if(klausimas("Skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos")){
-            if(S->pazymiusk>0){
-                S->vid=rastividurki(S->P, dydis);
-                S->gal=0.4*S->vid+0.6*S->egz;
-            }
-    }
-        else{
-            if(S->pazymiusk>0)
-            S->vid=rastimediana(S->P, dydis);
-        }
-    }
-
 int galutinis(studentoinfo studentas){
     int gal=(0.4*studentas.vid)+(0.6*studentas.egz);
     return gal;
+}
+
+void skaiciuotivid(studentoinfo* S, int dydis){
+    S->vid=0;
+    S->gal=0;
+    if(S->pazymiusk>0){
+                S->vid=rastividurki(S->P, S->pazymiusk);
+                S->gal=0.4*S->vid+0.6*S->egz;
+            }
+}
+
+void skaiciuotimed(studentoinfo* S, int dydis){
+    S->vid=0;
+    S->gal=0;
+    if(S->pazymiusk>0)
+            S->vid=rastimediana(S->P, S->pazymiusk);
+            S->gal=0.4*S->vid+0.6*S->egz;
 }
 
 void rez(studentoinfo* S){
@@ -167,6 +170,7 @@ int main()
             }
                 else{
                     st.P[i]=pazymys;
+                    sekantis(st.P, st.pazymiusk, pazymys);
                 }
             }
             }
@@ -175,7 +179,7 @@ int main()
         if(klausimas("Ar generuoti atsitiktinius pazymius?")){
             while(!inputend){
                 int pazymys=atsitiktinis(pmin, pmax);
-                if(pazymys>pmax||pazymys<pmin){
+                if((pazymys>pmax)||(pazymys<pmin)){
                 break;
             }
             else{
@@ -186,14 +190,14 @@ int main()
         else{
             while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
-            int a=0, pazymys;
+            int pazymys;
             cin>>pazymys;
             if(pazymys==0){
                 inputend=true;
                 break;
             }
             else if((pazymys>pmax)||(pazymys<pmin)){
-                cout<<"Pazymys negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax;
+                cout<<"Pazymys negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax<<endl;
             }
             else{
                 sekantis(st.P, st.pazymiusk, pazymys);
@@ -207,28 +211,21 @@ int main()
         cout<<"Rezultatas negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax<<". Bandykite dar karta."<<endl;
         cin>>st.egz;
     }
-    st.gal=galutinis(st);
     kitasstudentas(S, n, st);
     if(klausimas("Prideti dar viena studenta?")==false){
     baigta=true;
     break;
     }
     }
-     if(klausimas("Skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
+
+    if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
         for(int i=0; i<n; i++){
-            S[i].vid=rastividurki(st.P, n);
+            skaiciuotivid(&S[i], n);
         }
-        for(int j=0; j<n; j++){
-            S[j].gal=galutinis(st);
-        }
-        
     }
     else{
         for(int i=0; i<n; i++){
-            S[i].vid=rastimediana(st.P, n);
-        }
-        for(int j=0; j<n; j++){
-            S[j].gal=galutinis(st);
+            skaiciuotimed(&S[i], n);
         }
     }
     spausdinimas(S, n);
