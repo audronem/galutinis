@@ -1,18 +1,10 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <iomanip>
 #include <algorithm>
+#include <string>
+#include <iomanip>
 #include <random>
 
-using std::cout;
-using std::cin;
-using std::endl;
-using std::string;
-using std::vector;
-using std::sort;
-using std::setprecision;
-using std::setw;
+using namespace std;
 
 const int pmin=1;
 const int pmax=10;
@@ -20,10 +12,11 @@ const int pmax=10;
 struct studentoinfo{
     string vardas;
     string pavarde;
-    vector<int> pazymiai;
+    int pazymiusk;
+    double vid;
+    int gal;
     int egz;
-    double vidurkis;
-    double galutinis;
+    vector<int> pazymiai;
 };
 
 bool klausimas(string kl){
@@ -33,133 +26,176 @@ bool klausimas(string kl){
     if(ats==t){
         return true;
     }
-    else {
+    else if(ats==n){
         return false;
+    }
+    else{
+        cout<<"Klaidinga ivestis. Bandykite dar karta"<<endl;
+        cin>>ats;
     }
 }
 
+int ivestipazymiusk(){
+    int pazsk;
+    cout<<"Iveskite pazymiu skaiciu: ";
+    cin>>pazsk;
+
+    while(pazsk<=0){
+        cout<<"Klaidinga ivestis."<<endl;
+        cin>>pazsk;
+    }
+    return pazsk;
+}
+
+int atsitiktinis(int pmin, int pmax){
+    return pmin+rand()%((pmax+1)-pmin);
+}
+
 double rastividurki(vector<int> &skaiciai){
+    int sum=0;
     int dydis=skaiciai.size();
-    double sum=0;
     for(int i=0; i<dydis; i++){
         sum+=skaiciai[i];
     }
-    return (double)sum/dydis;
+    return (double)sum/(double)dydis;
 }
 
 double rastimediana(vector<int> &skaiciai){
     sort(skaiciai.begin(), skaiciai.end());
     int dydis=skaiciai.size();
     if(dydis%2!=0){
-        return (double)skaiciai[dydis/2];
+        return(double)skaiciai[dydis/2];
     }
-    else{
-        return (double)skaiciai[dydis/2]+skaiciai[(dydis/2)-1]/2;
+    return (double(skaiciai[(dydis-1)/2]+skaiciai[dydis/2])/2.0);
+}
+
+int galutinis(studentoinfo studentas){
+    int gal=(0.4*studentas.vid)+(0.6*studentas.egz);
+    return gal;
+}
+
+void skaiciuotivid(studentoinfo* S){
+    S->vid=0;
+    S->gal=0;
+    if(S->pazymiusk>0){
+                S->vid=rastividurki(S->pazymiai);
+                S->gal=0.4*S->vid+0.6*S->egz;
+            }
+}
+
+void skaiciuotimed(studentoinfo* S){
+    S->vid=0;
+    S->gal=0;
+    if(S->pazymiusk>0){
+        S->vid=rastimediana(S->pazymiai);
+            S->gal=0.4*S->vid+0.6*S->egz;
     }
 }
 
-int generuotiatsitiktini(int pmin, int pmax){
-    srand(time(NULL));
-    return pmin+rand()%((pmax+1)-pmin);
-}
-
-void rez(studentoinfo& studentas){
-    cout<<studentas.vardas;
-    cout.width(20);cout<<studentas.pavarde;
-    cout.width(20);cout<<setprecision(2)<<studentas.galutinis<<endl;
+void rez(studentoinfo* S){
+    cout<<left<<setw(20)<<S->vardas;
+    cout<<left<<setw(20)<<S->pavarde;
+    cout<<left<<setw(20)<<S->gal<<endl;
 }
 
 void spausdinimas(vector<studentoinfo>& studentai){
-    cout<<"Vardas";
-    cout.width(20); cout<<"Pavarde";
-    cout.width(20); cout<<"Galutinis";
+    cout<<left<<setw(20)<<"Vardas";
+    cout<<left<<setw(20)<<"Pavarde";
+    cout<<left<<setw(20)<<"Galutinis";
     cout<<endl<<string(50, '-')<<endl;
-
-    int n=studentai.size();
-    for(int i=0; i<n; i++){
-        rez(studentai[i]);
+    for(size_t i=0; i<studentai.size(); i++){
+        rez(&studentai[i]);
     }
-}
-
-double galutinis(studentoinfo studentas){
-    double gal=(0.4*studentas.vidurkis)+(0.6*studentas.egz);
-    return gal;
 }
 
 int main()
 {
+    srand (time(NULL));
     vector<studentoinfo> studentai;
-    studentoinfo studentas;
-    int pazymys;
-    int pazsk;
+    studentoinfo st;
     bool baigta=false;
     while(!baigta){
-    cout<<"Iveskite studento varda: ";
-    cin>>studentas.vardas;
-    cout<<"Iveskite studento pavarde: ";
-    cin>>studentas.pavarde;
-    bool inputend=false;
-    if(klausimas("Ar pazymiu skaicius yra zinomas?")){
-            cout<<"Iveskite pazymiu skaiciu: ";
-            cin>>pazsk;
-            while(pazsk<=0){
-            cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
-            cin>>pazsk;
-            }
+        cout<<"Iveskite varda: "<<endl;
+        cin>>st.vardas;
+        cout<<"Iveskite pavarde: "<<endl;
+        cin>>st.pavarde;
+        bool inputend=false;
+        if(klausimas("Ar pazymiu skaicius zinomas?")){
+            st.pazymiusk=ivestipazymiusk();
             if(klausimas("Ar generuoti atsitiktinius pazymius?")){
-                for(int i=0; i<pazsk; i++){
-                    pazymys=generuotiatsitiktini(pmin, pmax);
-                    studentas.pazymiai.push_back(pazymys);
-                }
+                cout<<"Sugeneruoti pazymiai: "<<endl;
+            for(int i=0; i<st.pazymiusk; i++){
+                int pazymys=atsitiktinis(pmin, pmax);
+                cout<<pazymys<<endl;
+                st.pazymiai.push_back(pazymys);
+            }
             }
             else{
-                cout<<"Iveskite pazymius: ";
-                for(int i=0; i<pazsk; i++){
+            int pazymys;
+            cout<<"Iveskite pazymius: ";
+            for(int i=0; i<st.pazymiusk; i++){
                 cin>>pazymys;
-                if(pazymys>pmax||pazymys<pmin){
-                cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
-                cin>>pazymys;
-                }
+                if((pazymys>pmax)||(pazymys<pmin)){
+            cout<<"Pazymys negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax<<endl;
+            }
                 else{
-                    studentas.pazymiai.push_back(pazymys);
-                }
+                    st.pazymiai.push_back(pazymys);
                 }
             }
             }
-    else{
-        while(!inputend){
+        }
+     else{
+        if(klausimas("Ar generuoti atsitiktinius pazymius?")){
+            while(!inputend){
+                int pazymys=atsitiktinis(pmin, pmax);
+                if((pazymys>pmax)||(pazymys<pmin)){
+                break;
+            }
+            else{
+                st.pazymiai.push_back(pazymys);
+            }
+            }
+        }
+        else{
+            while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
+            int pazymys;
             cin>>pazymys;
             if(pazymys==0){
                 inputend=true;
                 break;
             }
-            else if(pazymys>pmax||pazymys<pmin){
-                cout<<"Klaidinga ivestis. Bandykite dar karta."<<endl;
-                cin>>pazymys;
+            else if((pazymys>pmax)||(pazymys<pmin)){
+                cout<<"Pazymys negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax<<endl;
             }
             else{
-                studentas.pazymiai.push_back(pazymys);
+                st.pazymiai.push_back(pazymys);
             }
+        }
         }
     }
     cout<<"Iveskite egzamino rezultata: ";
-    cin>>studentas.egz;
-    studentas.galutinis=galutinis(studentas);
-    if(klausimas("Prideti dar viena studenta?")==false)
-    {
-        baigta=true;
-        break;
+    cin>>st.egz;
+    if((st.egz>pmax)||(st.egz<pmin)){
+        cout<<"Rezultatas negali buti mazesnis uz "<<pmin<<" ir didesnis uz "<<pmax<<". Bandykite dar karta."<<endl;
+        cin>>st.egz;
+    }
+    studentai.push_back(st);
+    if(klausimas("Prideti dar viena studenta?")==false){
+    baigta=true;
+    break;
+    }
+    }
+
+    if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
+        for(size_t i=0; i<studentai.size(); i++){
+            skaiciuotivid(&studentai[i]);
+        }
     }
     else{
-     studentai.push_back(studentas);
-    }
-    }
-    if(klausimas("Skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
-        studentas.vidurkis=rastividurki(studentas.pazymiai);
-    }
-    else{
-        studentas.vidurkis=rastimediana(studentas.pazymiai);
+        for(size_t i=0; i<studentai.size(); i++){
+            skaiciuotimed(&studentai[i]);
+        }
     }
     spausdinimas(studentai);
     return 0;
