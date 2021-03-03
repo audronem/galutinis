@@ -72,21 +72,22 @@ int galutinis(studentoinfo studentas){
     return gal;
 }
 
-void skaiciuotivid(studentoinfo* S, int dydis){
-    S->vid=0;
-    S->gal=0;
-    if(S->pazymiusk>0){
-                S->vid=rastividurki(S->P, S->pazymiusk);
-                S->gal=0.4*S->vid+0.6*S->egz;
-            }
+void skaiciuotivid(studentoinfo* st){
+    st->vid=0;
+    st->gal=0;
+    if(st->pazymiusk>0){
+        st->vid=rastividurki(st->P, st->pazymiusk);
+    }
+    st->gal=0.4*st->vid+0.6*st->egz;
 }
 
-void skaiciuotimed(studentoinfo* S, int dydis){
-    S->vid=0;
-    S->gal=0;
-    if(S->pazymiusk>0)
-            S->vid=rastimediana(S->P, S->pazymiusk);
-            S->gal=0.4*S->vid+0.6*S->egz;
+void skaiciuotimed(studentoinfo* st){
+    st->vid=0;
+    st->gal=0;
+    if(st->pazymiusk>0){
+        st->vid=rastimediana(st->P, st->pazymiusk);
+        st->gal=0.4*st->vid+0.6*st->egz;
+    }
 }
 
 void rez(studentoinfo* S){
@@ -220,13 +221,15 @@ int main()
 
     if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
         for(int i=0; i<n; i++){
-            skaiciuotivid(&S[i], n);
+            skaiciuotivid(&S[i]);
         }
+
     }
     else{
         for(int i=0; i<n; i++){
-            skaiciuotimed(&S[i], n);
+            skaiciuotimed(&S[i]);
         }
+
     }
     spausdinimas(S, n);
     atlaisvinimas(S, n);
