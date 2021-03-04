@@ -151,19 +151,16 @@ int main()
     getline(f, eilute);
     st.pazymiusk=pazymiuskaicius(eilute);
     while(!f.eof()){
-        for(int i=0; i<st.pazymiusk; i++){
             f>>st.vardas;
             f>>st.pavarde;
             for(int j=0; j<st.pazymiusk; j++){
                 f>>pazymys;
                 st.pazymiai.push_back(pazymys);
-                
             }
             f>>st.egz;
             studentai.push_back(st);
         }
         f.close();
-    }
     }
 
     else{
