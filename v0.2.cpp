@@ -128,6 +128,10 @@ int pazymiuskaicius(string eilute){
     return pazsk;
 }
 
+bool palyginimas(studentoinfo& a, studentoinfo& b){
+    return a.vardas < b.vardas;
+}
+
 int main()
 {
     srand (time(NULL));
@@ -249,6 +253,7 @@ int main()
             skaiciuotimed(&studentai[i]);
         }
     }
+    sort(studentai.begin(), studentai.end(), palyginimas);
     spausdinimas(studentai);
     return 0;
 }
