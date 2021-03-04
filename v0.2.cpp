@@ -112,59 +112,48 @@ void spausdinimas(vector<studentoinfo>& studentai){
     }
 }
 
-int pazymiuskaicius(string eilute){
-    int pazsk=0;
-    int stulpeliai=0;
-    std::istringstream iss(eilute);
-    do
-    {
-    string sub;
-    iss >> sub;
-    if (sub.length())
-        ++stulpeliai;
-    }
-    while(iss);
-    pazsk=stulpeliai-3;
-    return pazsk;
-}
-
 bool palyginimas(studentoinfo& a, studentoinfo& b){
     return a.vardas < b.vardas;
+}
+
+void skaitymas(string &failopav, vector<studentoinfo>& studentai){
+    ifstream f;
+    f.open(failopav);
+    if(f.fail()){
+    cout<<"Klaida!"<<endl;
+    exit(1);
+    }
+    int pazymys;
+    string eilute;
+    getline(f, eilute);
+    while(getline(f, eilute)){
+        studentoinfo st;
+        istringstream iss(eilute);
+        iss>>st.vardas;
+        iss>>st.pavarde;
+        while(iss>>pazymys){
+            st.pazymiai.push_back(pazymys);
+            }
+            st.pazymiai.pop_back();
+            st.egz=pazymys;
+            studentai.push_back(st);
+        }
+    f.close();
 }
 
 int main()
 {
     srand (time(NULL));
     vector<studentoinfo> studentai;
-    studentoinfo st;
     bool baigta=false;
-
+    string failopav="kursiokai.txt";
     if(klausimas("Nuskaityti is failo?")){
-            ifstream f;
-            f.open("kursiokai.txt");
-            if(f.fail()){
-            cout<<"Klaida!"<<endl;
-            return 1;
-            }
-    int pazymys;
-    string eilute;
-    getline(f, eilute);
-    st.pazymiusk=pazymiuskaicius(eilute);
-    while(!f.eof()){
-            f>>st.vardas;
-            f>>st.pavarde;
-            for(int j=0; j<st.pazymiusk; j++){
-                f>>pazymys;
-                st.pazymiai.push_back(pazymys);
-            }
-            f>>st.egz;
-            studentai.push_back(st);
-        }
-        f.close();
+            skaitymas(failopav, studentai);
     }
 
     else{
         while(!baigta){
+        studentoinfo st;
         cout<<"Iveskite varda: "<<endl;
         cin>>st.vardas;
         cout<<"Iveskite pavarde: "<<endl;
@@ -194,9 +183,8 @@ int main()
             }
             }
         }
-        
+
      else{
-        if(klausimas("Ar generuoti atsitiktinius pazymius?")){
             while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
             int pazymys;
@@ -213,7 +201,6 @@ int main()
             }
         }
         }
-    }
     cout<<"Iveskite egzamino rezultata: ";
     cin>>st.egz;
     if((st.egz>pmax)||(st.egz<pmin)){
@@ -227,15 +214,14 @@ int main()
     }
     }
     }
-        
+
     if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
-        for(int i=0; i<studentai.size(); i++){
+        for(size_t i=0; i<studentai.size(); i++){
             skaiciuotivid(&studentai[i]);
-            double galutinis=0.4*studentai[i].vid+0.6*studentai[i].egz;
         }
     }
     else{
-        for(int i=0; i<studentai.size(); i++){
+        for(size_t i=0; i<studentai.size(); i++){
             skaiciuotimed(&studentai[i]);
         }
     }
