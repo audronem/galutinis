@@ -198,17 +198,6 @@ int main()
      else{
         if(klausimas("Ar generuoti atsitiktinius pazymius?")){
             while(!inputend){
-                int pazymys=atsitiktinis(pmin, pmax);
-                if((pazymys>pmax)||(pazymys<pmin)){
-                break;
-            }
-            else{
-                st.pazymiai.push_back(pazymys);
-            }
-            }
-        }
-        else{
-            while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
             int pazymys;
             cin>>pazymys;
