@@ -96,7 +96,7 @@ void skaiciuotimed(studentoinfo* S){
 void rez(studentoinfo* S){
     cout<<left<<setw(20)<<S->vardas;
     cout<<left<<setw(20)<<S->pavarde;
-    cout<<left<<setw(20)<<S->gal<<endl;
+    cout<<left<<setw(20)<<setprecision(3)<<S->gal<<endl;
 }
 
 void spausdinimas(vector<studentoinfo>& studentai){
