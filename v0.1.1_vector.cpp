@@ -15,7 +15,7 @@ struct studentoinfo{
     string pavarde;
     int pazymiusk;
     double vid;
-    int gal;
+    double gal;
     int egz;
     vector<int> pazymiai;
 };
@@ -70,8 +70,8 @@ double rastimediana(vector<int> &skaiciai){
     return (double(skaiciai[(dydis-1)/2]+skaiciai[dydis/2])/2.0);
 }
 
-int galutinis(studentoinfo studentas){
-    int gal=(0.4*studentas.vid)+(0.6*studentas.egz);
+double galutinis(studentoinfo studentas){
+    double gal=(0.4*studentas.vid)+(0.6*studentas.egz);
     return gal;
 }
 
@@ -113,9 +113,9 @@ int main()
 {
     srand (time(NULL));
     vector<studentoinfo> studentai;
-    studentoinfo st;
     bool baigta=false;
     while(!baigta){
+        studentoinfo st;
         cout<<"Iveskite varda: "<<endl;
         cin>>st.vardas;
         cout<<"Iveskite pavarde: "<<endl;
@@ -146,18 +146,6 @@ int main()
             }
         }
      else{
-        if(klausimas("Ar generuoti atsitiktinius pazymius?")){
-            while(!inputend){
-                int pazymys=atsitiktinis(pmin, pmax);
-                if((pazymys>pmax)||(pazymys<pmin)){
-                break;
-            }
-            else{
-                st.pazymiai.push_back(pazymys);
-            }
-            }
-        }
-        else{
             while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
             int pazymys;
@@ -172,7 +160,6 @@ int main()
             else{
                 st.pazymiai.push_back(pazymys);
             }
-        }
         }
     }
     cout<<"Iveskite egzamino rezultata: ";
