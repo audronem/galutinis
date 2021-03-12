@@ -58,14 +58,21 @@ int main()
     srand (time(NULL));
     vector<studentoinfo> studentai;
     bool baigta=false;
-    string failopav="dgdfg.txt";
+    string failopav="studentai1000000.txt";
     if(klausimas("Nuskaityti is failo?")){
             ifstream f;
-            f.exceptions ( std::ifstream::failbit | std::ifstream::badbit );
-            try {
-                int pazymys;
+            try{
                 f.open (failopav);
-                std::string eilute;
+                    if(f.fail()){
+                    throw "Klaida atidarant faila."s;
+                    }
+            }
+            catch (string fail) {
+            cout << fail <<endl;
+            exit(1);
+            }
+            int pazymys;
+            std::string eilute;
                 getline(f, eilute);
                 while (getline(f, eilute)){
                     studentoinfo st;
@@ -80,11 +87,6 @@ int main()
                 studentai.push_back(st);
                 }
                 f.close();
-                }
-            catch (ifstream::failure e) {
-            std::cerr << "Klaida nuskaitant faila."<<endl;
-            exit(1);
-            }
         }
 
     else{
