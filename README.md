@@ -10,6 +10,8 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
   - Studentai ir jų galutiniai rezultatai atspausdinami abėcėlės tvarka (pagal vardą).
 - [v0.3](https://github.com/audronem/galutinis/tree/v0.3)
   - Pridėtas išimčių valdymas.
+- [v0.3.1](https://github.com/audronem/galutinis/tree/v0.3)
+  - Pataisytas išimčių valdymas.
 ##
 #### Programos įdiegimas ir naudojimas
 1. Iš "Releases" atsisiųskite norimą programos versiją.
