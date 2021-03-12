@@ -19,30 +19,6 @@ bool palyginimas(studentoinfo& a, studentoinfo& b)
     return a.vardas < b.vardas;
 }
 
-void skaitymas(std::string &failopav, std::vector<studentoinfo>& studentai){
-    int pazymys;
-    std::ifstream f;
-    if(f.fail()){
-        cout<<"Klaida!"<<endl;
-        exit(1);
-    }
-    std::string eilute;
-    getline(f, eilute);
-    while(getline(f, eilute)){
-            studentoinfo st;
-            std::istringstream iss(eilute);
-            iss>>st.vardas;
-            iss>>st.pavarde;
-            while(iss>>pazymys){
-                st.pazymiai.push_back(pazymys);
-            }
-            st.pazymiai.pop_back();
-            st.egz=pazymys;
-            studentai.push_back(st);
-        }
-        f.close();
-}
-
 void spausdinimas(std::vector<studentoinfo>& studentai){
     std::cout<<std::left<<std::setw(20)<<"Vardas";
     std::cout<<std::left<<std::setw(20)<<"Pavarde";
