@@ -12,6 +12,10 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
   - Pridėtas išimčių valdymas.
 - [v0.3.1](https://github.com/audronem/galutinis/tree/v0.3)
   - Pataisytas išimčių valdymas.
+- [v0.4](https://github.com/audronem/galutinis/tree/v0.4)
+  - Pridėta galimybė generuoti tekstinius duomenų failus.
+  - Studentai suskirstomi į dvi atskiras grupes pagal galutinį balą.
+  - Testavimo laiko skaičiavimas.
 ##
 #### Programos įdiegimas ir naudojimas
 1. Iš "Releases" atsisiųskite norimą programos versiją.
