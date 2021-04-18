@@ -1,16 +1,32 @@
 #include "funkcijos.h"
-#include <iostream>
-#include <random>
-#include <iomanip>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <fstream>
 
 void rez(studentoinfo* S){
     std::cout<<std::left<<std::setw(20)<<S->vardas;
     std::cout<<std::left<<std::setw(20)<<S->pavarde;
     std::cout<<std::left<<std::setw(20)<<std::setprecision(3)<<S->galvid<< std::setw(20)<<S->galmed<<std::endl;
+}
+
+bool palyginimas(studentoinfo& a, studentoinfo& b)
+{
+    return a.galvid < b.galvid;
+}
+
+bool yralaimingu(studentoinfo& a){
+    return a.galvid>=5;
+}
+
+void spausdinimasifaila(std::vector<studentoinfo>& studentai, std::string& pavadinimas){
+    std::ofstream s(pavadinimas);
+    s<<std::left<<std::setw(20)<<"Vardas";
+    s<<std::left<<std::setw(20)<<"Pavarde";
+    s<<std::left<<std::setw(20)<<"Galutinis (vid.)";
+    s<<std::left<<std::setw(20)<<"Galutinis (med.)";
+    s<<std::endl<<std::string(80, '-')<<std::endl;
+    for(size_t i=0; i<studentai.size(); i++){
+        s<<std::left<<std::setw(20)<<studentai[i].vardas;
+        s<<std::left<<std::setw(20)<<studentai[i].pavarde;
+        s<<std::left<<std::setw(20)<<std::setprecision(3)<<studentai[i].galvid<< std::setw(20)<<studentai[i].galmed<<std::endl;
+    }
 }
 
 int ivestipazymiusk(){
@@ -171,5 +187,46 @@ void pasirink(int pasirinkimas){
         std::cout << "Rinkites dar karta.\n";
         std::cin >> pasirinkimas;
         break;
+    }
+}
+
+void spausdinimasvector(std::vector<studentoinfo>& studentai, std::string& pavadinimas){
+
+    std::ofstream s(pavadinimas);
+    s<<std::left<<std::setw(20)<<"Vardas";
+    s<<std::left<<std::setw(20)<<"Pavarde";
+    s<<std::left<<std::setw(20)<<"Galutinis (vid.)";
+    s<<std::left<<std::setw(20)<<"Galutinis (med.)";
+    s<<std::endl<<std::string(80, '-')<<std::endl;
+
+    for(int i=0; i<studentai.size(); i++){
+        s<<std::left<<std::setw(20)<<studentai[i].vardas;
+        s<<std::left<<std::setw(20)<<studentai[i].pavarde;
+        s<<std::left<<std::setw(20)<<std::setprecision(3)<<studentai[i].galvid<< std::setw(20)<<studentai[i].galmed<<std::endl;
+    }
+}
+
+void spausdinimaslist(std::list<studentoinfo>& studentai, std::string& pavadinimas){
+    std::ofstream s(pavadinimas);
+    
+    s<<std::left<<std::setw(20)<<"Vardas";
+    s<<std::left<<std::setw(20)<<"Pavarde";
+    s<<std::left<<std::setw(20)<<"Galutinis (vid.)";
+    s<<std::left<<std::setw(20)<<"Galutinis (med.)";
+    s<<std::endl<<std::string(80, '-')<<std::endl;
+}
+
+void spausdinimasdeque(std::deque<studentoinfo>& studentai, std::string& pavadinimas){
+    std::ofstream s(pavadinimas);
+    s<<std::left<<std::setw(20)<<"Vardas";
+    s<<std::left<<std::setw(20)<<"Pavarde";
+    s<<std::left<<std::setw(20)<<"Galutinis (vid.)";
+    s<<std::left<<std::setw(20)<<"Galutinis (med.)";
+    s<<std::endl<<std::string(80, '-')<<std::endl;
+
+    for(int i=0; i<studentai.size(); i++){
+        s<<std::left<<std::setw(20)<<studentai[i].vardas;
+        s<<std::left<<std::setw(20)<<studentai[i].pavarde;
+        s<<std::left<<std::setw(20)<<std::setprecision(3)<<studentai[i].galvid<< std::setw(20)<<studentai[i].galmed<<std::endl;
     }
 }
