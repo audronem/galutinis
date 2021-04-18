@@ -2,32 +2,50 @@
 #define FUNKCIJOS_H
 
 #include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <algorithm>
 #include <string>
 #include <vector>
+#include <list>
+#include <deque>
 #include "studentai.h"
 
-inline bool klausimas(std::string);
+const int pmin=1;
+const int pmax=10;
 
-inline int ivestipazymiusk();
+bool klausimas(std::string);
 
-inline int atsitiktinis(int, int);
+int ivestipazymiusk();
 
-inline double rastividurki(std::vector<int>&);
+int atsitiktinis(int, int);
 
-inline double rastimediana(std::vector<int>&);
+double rastividurki(std::vector<int>&);
 
-inline void skaiciuotivid(studentoinfo*);
+double rastimediana(std::vector<int>&);
 
-inline void skaiciuotimed(studentoinfo*);
+void skaiciuotivid(studentoinfo*);
 
-inline void rez(studentoinfo*);
+void skaiciuotimed(studentoinfo*);
+
+void rez(studentoinfo*);
 
 void skaitymas(std::string&, std::vector<studentoinfo>&);
 
 void spausdinimas(std::vector<studentoinfo>&);
 
-inline double galutinis(studentoinfo);
+double galutinis(studentoinfo);
 
-inline void pasirink(int);
+void pasirink(int);
+
+bool palyginimas(studentoinfo& a, studentoinfo& b);
+
+bool yralaimingu(studentoinfo& a);
+
+void spausdinimasvector(std::vector<studentoinfo>& studentai, std::string& pavadinimas);
+
+void spausdinimaslist(std::list<studentoinfo>& studentai, std::string& pavadinimas);
+
+void spausdinimasdeque(std::deque<studentoinfo>& studentai, std::string& pavadinimas);
 
 #endif
