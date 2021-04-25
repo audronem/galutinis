@@ -1,30 +1,8 @@
 #include "funkcijos.h"
 #include "timer.h"
+#include "pasirinkduom.hpp"
 
 using namespace std;
-
-void skaitymas(std::string &failopav, std::vector<studentoinfo>& studentai){
-    std::ifstream f;
-    if(f.fail()){
-        cout<<"Klaida!"<<endl;
-        exit(1);
-    }
-    int pazymys;
-    std::string eilute;
-    while(getline(f, eilute)){
-            studentoinfo st;
-            std::istringstream iss(eilute);
-            iss>>st.vardas;
-            iss>>st.pavarde;
-            while(iss>>pazymys){
-                st.pazymiai.push_back(pazymys);
-            }
-            st.pazymiai.pop_back();
-            st.egz=pazymys;
-            studentai.push_back(st);
-        }
-        f.close();
-}
 
 void spausdinimas(std::vector<studentoinfo>& studentai){
     std::cout<<std::left<<std::setw(20)<<"Vardas";
@@ -36,54 +14,6 @@ void spausdinimas(std::vector<studentoinfo>& studentai){
         rez(&studentai[i]);
     }
 }
-
-
-
-void skaitymas(vector<studentoinfo> studentai){
-    std::string failopav;
-    std::ifstream f2;
-
-    try{
-        f2.open (failopav);
-        if(f2.fail()){
-        throw "Klaida atidarant faila.";
-        }
-    }
-    catch (std::string fail) {
-        std::cout << fail << std::endl;
-        exit(1);
-    }
-
-    int paz;
-    std::string eil;
-    while (getline(f2, eil)){
-        studentoinfo st2;
-        std::istringstream iss(eil);
-        iss>>st2.vardas;
-        iss>>st2.pavarde;
-
-        while(iss>>paz){
-            st2.pazymiai.push_back(paz);
-        }
-        st2.pazymiai.pop_back();
-        st2.egz=paz;
-        studentai.push_back(st2);
-    }
-
-    f2.close();
-            
-    for(int i=0; i<studentai.size(); i++){
-        skaiciuotivid(&studentai[i]);
-    }
-    for(int j=0; j<studentai.size(); j++){
-        skaiciuotimed(&studentai[j]);
-    }
-
-    sort(studentai.begin(), studentai.end(), palyginimas);
-
-    auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
-    
-    }
 
 void pasirink2(int pasirinkimas2){
     std::cout<<"Pasirinkite konteineri: "<< std::endl;
@@ -101,47 +31,27 @@ void pasirink2(int pasirinkimas2){
             std::vector<studentoinfo> studentai;
             std::vector<studentoinfo> laimingi;
 
-            string failopav="sugeneruotas1000.txt";
-        
-            ifstream f2;
-            try{
-                f2.open (failopav);
-                    if(f2.fail()){
-                    throw "Klaida atidarant faila."s;
-                    }
-            }
-            catch (string fail) {
-            cout << fail <<endl;
-            exit(1);
-            }
-            int paz;
-            std::string eil;
-                while (getline(f2, eil)){
-                    studentoinfo st2;
-                    std::istringstream iss(eil);
-                    iss>>st2.vardas;
-                    iss>>st2.pavarde;
-                    while(iss>>paz){
-                    st2.pazymiai.push_back(paz);
-                }
-                st2.pazymiai.pop_back();
-                st2.egz=paz;
-                studentai.push_back(st2);
-                }
-                f2.close();
+            pasirinkduom(studentai);
+
+            studentai.reserve(10000000);
 
             for(size_t i=0; i<studentai.size(); i++){
-            skaiciuotivid(&studentai[i]);
+                skaiciuotivid(&studentai[i]);
             }
+
             for(size_t j=0; j<studentai.size(); j++){
-            skaiciuotimed(&studentai[j]);
+                skaiciuotimed(&studentai[j]);
             }
+
+            timer t;
 
             sort(studentai.begin(), studentai.end(), palyginimas);
 
+            std::cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<std::endl;
+
             auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
 
-            timer t;
+            t.reset();
 
             laimingi.resize(studentai.end() - it);
             std::copy(it, studentai.end(), laimingi.begin());
@@ -154,6 +64,7 @@ void pasirink2(int pasirinkimas2){
             std::string pavadinimas2="maziau_laimingi_vector.txt";
             spausdinimasvector(studentai, pavadinimas2);
             break;
+            
         }
 
         case 2:
@@ -161,61 +72,52 @@ void pasirink2(int pasirinkimas2){
             std::list<studentoinfo> studentai;
             std::list<studentoinfo> laimingi;
 
-            string failopav="sugeneruotas1000.txt";
-        
-            ifstream f2;
-            try{
-                f2.open (failopav);
-                    if(f2.fail()){
-                    throw "Klaida atidarant faila."s;
+            pasirinkduom(studentai);
+
+            for(std::list<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                it->vid=0;
+                it->galvid=0;
+                    if(it->pazymiusk>0){
+                        it->vid=rastividurki(it->pazymiai);
+                        it->galvid=0.4*it->vid+0.6*it->egz;
                     }
             }
-            catch (string fail) {
-            cout << fail <<endl;
-            exit(1);
+
+            for(std::list<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                it->vid=0;
+                it->galmed=0;
+                    if(it->pazymiusk>0){
+                        it->vid=rastimediana(it->pazymiai);
+                        it->galmed=0.4*it->vid+0.6*it->egz;
+                    }
             }
-            int paz;
-            std::string eil;
-                while (getline(f2, eil)){
-                    studentoinfo st2;
-                    std::istringstream iss(eil);
-                    iss>>st2.vardas;
-                    iss>>st2.pavarde;
-                    while(iss>>paz){
-                    st2.pazymiai.push_back(paz);
-                }
-                st2.pazymiai.pop_back();
-                st2.egz=paz;
-                studentai.push_back(st2);
-                }
-                f2.close();
-
-            //for(int i=0; i<studentai.size(); i++){
-            //skaiciuotivid(studentai[i]);
-            //}
-            //for(int j=0; j<studentai.size(); j++){
-            //skaiciuotimed(studentai[j]);
-            //}
-
-            sort(studentai.begin(), studentai.end(), palyginimas);
-
-            auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
-
-            std::list<studentoinfo>::iterator it;
-
-            it=find_if(studentai.begin(), studentai.end(), yralaimingu);
 
             timer t;
 
+            studentai.sort(palyginimas);
+
+            cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<endl;
+
+            t.reset();
+
+            auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
+
             laimingi.assign(it, studentai.end());
 
+            studentai.erase(it, studentai.end());
+
             cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<endl;
+
+            t.reset();
 
             std::string pavadinimas="laimingi_list.txt";
             spausdinimaslist(laimingi, pavadinimas);
 
             std::string pavadinimas2="maziau_laimingi_list.txt";
             spausdinimaslist(studentai, pavadinimas2);
+
+            cout<<"Spausdinimas uztruko "<<t.elapsed()<<"s"<<endl;
+
             break;
         }
 
@@ -224,57 +126,52 @@ void pasirink2(int pasirinkimas2){
             std::deque<studentoinfo> studentai;
             std::deque<studentoinfo> laimingi;
 
-            string failopav="sugeneruotas1000.txt";
-        
-            ifstream f2;
-            try{
-                f2.open (failopav);
-                    if(f2.fail()){
-                    throw "Klaida atidarant faila."s;
+            pasirinkduom(studentai);
+
+            for(std::deque<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                it->vid=0;
+                it->galvid=0;
+                    if(it->pazymiusk>0){
+                        it->vid=rastividurki(it->pazymiai);
+                        it->galvid=0.4*it->vid+0.6*it->egz;
                     }
             }
-            catch (string fail) {
-            cout << fail <<endl;
-            exit(1);
-            }
-            int paz;
-            std::string eil;
-                while (getline(f2, eil)){
-                    studentoinfo st2;
-                    std::istringstream iss(eil);
-                    iss>>st2.vardas;
-                    iss>>st2.pavarde;
-                    while(iss>>paz){
-                    st2.pazymiai.push_back(paz);
-                }
-                st2.pazymiai.pop_back();
-                st2.egz=paz;
-                studentai.push_back(st2);
-                }
-                f2.close();
 
-            for(size_t i=0; i<studentai.size(); i++){
-            skaiciuotivid(&studentai[i]);
+            for(std::deque<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                it->vid=0;
+                it->galmed=0;
+                    if(it->pazymiusk>0){
+                        it->vid=rastimediana(it->pazymiai);
+                        it->galmed=0.4*it->vid+0.6*it->egz;
+                    }
             }
-            for(size_t j=0; j<studentai.size(); j++){
-            skaiciuotimed(&studentai[j]);
-            }
-
-            sort(studentai.begin(), studentai.end(), palyginimas);
-
-            std::deque<studentoinfo>::iterator it=find(studentai.begin(), studentai.end(), yralaimingu);
 
             timer t;
 
+            sort(studentai.begin(), studentai.end(), palyginimas);
+
+            cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<endl;
+
+            t.reset();
+
+            auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
+
             laimingi.assign(it, studentai.end());
 
+            studentai.erase(it, studentai.end());
+
             cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<endl;
+
+            t.reset();
 
             std::string pavadinimas="laimingi_deque.txt";
             spausdinimasdeque(laimingi, pavadinimas);
 
             std::string pavadinimas2="maziau_laimingi_deque.txt";
             spausdinimasdeque(studentai, pavadinimas2);
+
+            cout<<"Spausdinimas uztruko "<<t.elapsed()<<"s"<<endl;
+
             break;
         }
     }
@@ -289,18 +186,18 @@ int main()
     if(klausimas("Generuoti failus?")){
         int pas;
         
-        auto start = std::chrono::high_resolution_clock::now();
+        timer t;
 
         pasirink(pas);
 
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = end - start;
-        std::cout << "Generavimas uztruko " << elapsed.count() << " s\n";
+        std::cout << "Generavimas uztruko " << t.elapsed() << " s\n";
         
         int pas2;
-        pasirink2(pas2);
-
 }
+    if(klausimas("Tikrinti programos veikimo sparta?")){
+        int pas2;
+        pasirink2(pas2);
+    }
 
     else{
         if(klausimas("Nuskaityti is failo?")){
@@ -398,16 +295,11 @@ int main()
     }
     }
     }
-    if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
-        for(size_t i=0; i<studentai.size(); i++){
+    for(size_t i=0; i<studentai.size(); i++){
             skaiciuotivid(&studentai[i]);
-        }
-    }
-    else{
-        for(size_t i=0; i<studentai.size(); i++){
             skaiciuotimed(&studentai[i]);
         }
-    }
+
     sort(studentai.begin(), studentai.end(), palyginimas);
     spausdinimas(studentai);
 
