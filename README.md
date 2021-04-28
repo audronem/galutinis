@@ -51,7 +51,7 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 ## Testavimo sistemos parametrai
 **CPU:** Intel Core i5-10600K @ 4.80GHz  
 **RAM:** DDR4 2x8GB @ 3000MHz  
-**1TB SSD**
+**1TB M.2 SSD**
 
 ## Programos įdiegimas ir naudojimas
 1. Iš "Releases" atsisiųskite norimą programos versiją.
