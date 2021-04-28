@@ -33,8 +33,6 @@ void pasirink2(int pasirinkimas2){
 
             pasirinkduom(studentai);
 
-            studentai.reserve(10000000);
-
             for(size_t i=0; i<studentai.size(); i++){
                 skaiciuotivid(&studentai[i]);
             }
@@ -48,6 +46,32 @@ void pasirink2(int pasirinkimas2){
             sort(studentai.begin(), studentai.end(), palyginimas);
 
             std::cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<std::endl;
+            cout<<std::string(50, '-')<<endl;
+            std::cout<<"Skirstoma skirtingomis strategijomis..."<<std::endl;
+
+            cout<<"1 strategija:"<<endl;
+            vector<studentoinfo> maziaulaimingi;
+
+            t.reset();
+            for(vector<studentoinfo>::size_type i=0; i!=studentai.size(); ++i){
+                if(yralaimingu(studentai[i])){
+                    laimingi.push_back(studentai[i]);
+                }
+                else{
+                    maziaulaimingi.push_back(studentai[i]);
+                }
+            }
+
+            cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<endl;
+
+                std::string pavadinimas="laimingi_vector1.txt";
+                spausdinimasvector(laimingi, pavadinimas);
+
+                std::string pavadinimas2="maziau_laimingi_vector1.txt";
+                spausdinimasvector(maziaulaimingi, pavadinimas2);
+
+            cout<<std::string(20, '-')<<endl;
+            cout<<"2 strategija:"<<endl;
 
             auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
 
@@ -58,11 +82,11 @@ void pasirink2(int pasirinkimas2){
 
             cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<endl;
 
-            std::string pavadinimas="laimingi_vector.txt";
-            spausdinimasvector(laimingi, pavadinimas);
+            std::string pavadinimas3="laimingi_vector2.txt";
+            spausdinimasvector(laimingi, pavadinimas3);
 
-            std::string pavadinimas2="maziau_laimingi_vector.txt";
-            spausdinimasvector(studentai, pavadinimas2);
+            std::string pavadinimas4="maziau_laimingi_vector2.txt";
+            spausdinimasvector(studentai, pavadinimas4);
             break;
             
         }
@@ -96,7 +120,35 @@ void pasirink2(int pasirinkimas2){
 
             studentai.sort(palyginimas);
 
-            cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<endl;
+            std::cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<std::endl;
+            cout<<std::string(50, '-')<<endl;
+            std::cout<<"Skirstoma skirtingomis strategijomis..."<<std::endl;
+
+            cout<<"1 strategija:"<<endl;
+
+            std::list<studentoinfo> maziaulaimingi;
+
+            t.reset();
+
+            for(std::list<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                if(yralaimingu(*it)){
+                    laimingi.push_back(*it);
+                }
+                else{
+                    maziaulaimingi.push_back(*it);
+                }
+            }
+
+            std::cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<std::endl;
+
+            std::string pavadinimas="laimingi_list1.txt";
+            spausdinimaslist(laimingi, pavadinimas);
+
+            std::string pavadinimas2="maziau_laimingi_list1.txt";
+            spausdinimaslist(maziaulaimingi, pavadinimas2);
+
+            cout<<std::string(20, '-')<<endl;
+            cout<<"2 strategija:"<<endl;
 
             t.reset();
 
@@ -108,15 +160,11 @@ void pasirink2(int pasirinkimas2){
 
             cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<endl;
 
-            t.reset();
+            std::string pavadinimas3="laimingi_list2.txt";
+            spausdinimaslist(laimingi, pavadinimas3);
 
-            std::string pavadinimas="laimingi_list.txt";
-            spausdinimaslist(laimingi, pavadinimas);
-
-            std::string pavadinimas2="maziau_laimingi_list.txt";
-            spausdinimaslist(studentai, pavadinimas2);
-
-            cout<<"Spausdinimas uztruko "<<t.elapsed()<<"s"<<endl;
+            std::string pavadinimas4="maziau_laimingi_list2.txt";
+            spausdinimaslist(studentai, pavadinimas4);
 
             break;
         }
@@ -152,6 +200,35 @@ void pasirink2(int pasirinkimas2){
 
             cout<<"Rusiavimas uztruko "<<t.elapsed()<<"s"<<endl;
 
+            cout<<std::string(50, '-')<<endl;
+            std::cout<<"Skirstoma skirtingomis strategijomis..."<<std::endl;
+
+            cout<<"1 strategija:"<<endl;
+
+            std::deque<studentoinfo> maziaulaimingi;
+
+            t.reset();
+
+            for(std::deque<studentoinfo>::iterator it=studentai.begin(); it!=studentai.end(); ++it){
+                if(yralaimingu(*it)){
+                    laimingi.push_back(*it);
+                }
+                else{
+                    maziaulaimingi.push_back(*it);
+                }
+            }
+
+            std::cout<<"Skirstymas uztruko "<<t.elapsed()<<"s"<<std::endl;
+
+            std::string pavadinimas="laimingi_deque1.txt";
+            spausdinimasdeque(laimingi, pavadinimas);
+
+            std::string pavadinimas2="maziau_laimingi_deque1.txt";
+            spausdinimasdeque(maziaulaimingi, pavadinimas2);
+
+            cout<<std::string(20, '-')<<endl;
+            std::cout<<"2 strategija:"<<std::endl;
+
             t.reset();
 
             auto it=find_if(studentai.begin(), studentai.end(), yralaimingu);
@@ -164,13 +241,11 @@ void pasirink2(int pasirinkimas2){
 
             t.reset();
 
-            std::string pavadinimas="laimingi_deque.txt";
-            spausdinimasdeque(laimingi, pavadinimas);
+            std::string pavadinimas3="laimingi_deque2.txt";
+            spausdinimasdeque(laimingi, pavadinimas3);
 
-            std::string pavadinimas2="maziau_laimingi_deque.txt";
-            spausdinimasdeque(studentai, pavadinimas2);
-
-            cout<<"Spausdinimas uztruko "<<t.elapsed()<<"s"<<endl;
+            std::string pavadinimas4="maziau_laimingi_deque2.txt";
+            spausdinimasdeque(studentai, pavadinimas4);
 
             break;
         }
