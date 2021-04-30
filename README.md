@@ -1,4 +1,10 @@
-### Turinys
+## Turinys
+* [Galutinio balo skaičiuoklė](#galutinio-balo-skaičiuoklė)  
+* [Programos įdiegimas](#programos-įdiegimas)  
+* [Naudojimas](#naudojimas)  
+* [Versijos](#versijos)  
+* [Benchmark rezultatai](#benchmark-rezultatai-naudojant-skirtingus-konteinerius-sekund%C4%97mis)
+* [Testavimo sistemos parametrai](#testavimo-sistemos-parametrai)  
 
 # Galutinio balo skaičiuoklė
 Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzamino rezultatą, apskaičiuojami galutiniai balai.
