@@ -41,7 +41,31 @@ make
 ./programa
 ```
 ## Naudojimas
+Paleidus programą, naudotojo paklausiama, kokią funkciją atlikti:
+```
+Generuoti failus? | t/n
+```
 
+Pasirinkus generuoti duomenų failus, naudotojo paprašoma įvesti generuojamų pažymių skaičių (įskaitant ir egzamino pažymį):
+```
+Iveskite pazymiu skaiciu:
+```
+
+Naudotojui įvedus norimą skaičių, pasiteiraujama, kiek įrašų (studentų) turi būti sugeneruota.  
+```
+1. 1000 irasu
+2. 10000 irasu
+3. 100000 irasu
+4. 1000000 irasu
+5. 10000000 irasu
+```
+
+Pasirinkus įrašų kiekį, programa pradeda generuoti duomenų failą.
+```
+3
+Generuojamas 100000 irasu failas...
+Generavimas uztruko 2.62263 s
+```
 
 ## Versijos
 - [v0.1](https://github.com/audronem/galutinis/tree/v0.1)
