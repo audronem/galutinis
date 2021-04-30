@@ -57,6 +57,8 @@ make
   - Pridėta galimybė generuoti tekstinius duomenų failus.
   - Studentai suskirstomi į dvi atskiras grupes pagal galutinį balą.
   - Testavimo laiko skaičiavimas.
+- [v0.5](https://github.com/audronem/galutinis/tree/v0.4)
+  - Pridėti du nauji konteineriai testavimui – *list* ir *deque*.  
 
 ## Benchmark rezultatai naudojant skirtingus konteinerius (sekundėmis)
 ### 1000 elementų
