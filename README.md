@@ -12,7 +12,7 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 #### 1 būdas:
 1. Iš "Releases" atsisiųskite norimą programos versiją.
 2. Išarchyvuokite failus.
-3. Atsidarykite terminalą arba cmd (jeigu naudojate Windows).
+3. Atsidarykite komandinę eilutę.
 4. Pakeiskite savo direktoriją į .cpp failo direktoriją. Jei failas yra C disko "Downloads" aplanke, komanda atrodytų taip:
 ```
 cd 'C:/Users/<naudotojo vardas>/Downloads'
@@ -21,11 +21,11 @@ cd 'C:/Users/<naudotojo vardas>/Downloads'
 ```
 g++ -c <cpp failo pavadinimas>.cpp <antro cpp failo pavadinimas>.cpp
 ```
-7. Sukompiliuokite failą naudojant g++:
+6. Sukompiliuokite failą naudojant g++:
 ```
 g++ -o <programos pavadinimas> <objektinio failo pavadinimas>.o <antro objektinio failo pavadinimas>.o
 ```
-6. Paleiskite programą:
+7. Paleiskite programą:
 ```
 ./<programos pavadinimas>
 ```
