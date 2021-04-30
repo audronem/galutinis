@@ -1,7 +1,42 @@
+### Turinys
+
 # Galutinio balo skaičiuoklė
-#### Programos veikimas
 Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzamino rezultatą, apskaičiuojami galutiniai balai.
-##
+## Programos įdiegimas
+#### 1 būdas:
+1. Iš "Releases" atsisiųskite norimą programos versiją.
+2. Išarchyvuokite failus.
+3. Atsidarykite terminalą arba cmd (jeigu naudojate Windows).
+4. Pakeiskite savo direktoriją į .cpp failo direktoriją. Jei failas yra C disko "Downloads" aplanke, komanda atrodytų taip:
+```
+cd 'C:/Users/<naudotojo vardas>/Downloads'
+```
+5. Jei pasirinkta versija turi kelis .cpp failus, sukompiliuokite objektinius kodus ir sulinkinkite juos:
+```
+g++ -c <cpp failo pavadinimas>.cpp <antro cpp failo pavadinimas>.cpp
+```
+7. Sukompiliuokite failą naudojant g++:
+```
+g++ -o <programos pavadinimas> <objektinio failo pavadinimas>.o <antro objektinio failo pavadinimas>.o
+```
+6. Paleiskite programą:
+```
+./<programos pavadinimas>
+```
+
+#### 2 būdas (nuo v0.5):
+1 būdo 1-4 žingsniai;  
+5. Komandinėje eilutėje parašykite:
+```
+make
+```
+6. Paleiskite programą:
+```
+./programa
+```
+## Naudojimas
+
+
 ## Versijos
 - [v0.1](https://github.com/audronem/galutinis/tree/v0.1)
 - [v0.1.1](https://github.com/audronem/galutinis/tree/v0.1.1)
@@ -52,22 +87,3 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 **CPU:** Intel Core i5-10600K @ 4.80GHz  
 **RAM:** DDR4 2x8GB @ 3000MHz  
 **1TB M.2 SSD**
-
-## Programos įdiegimas ir naudojimas
-1. Iš "Releases" atsisiųskite norimą programos versiją.
-2. Išarchyvuokite failus.
-3. Atsidarykite terminalą arba cmd (jeigu naudojate Windows).
-4. Pakeiskite savo direktoriją į .cpp failo direktoriją. Jei failas yra C disko "Downloads" aplanke, komanda atrodytų taip:
-```
-cd 'C:/Users/<naudotojo vardas>/Downloads'
-```
-5. Komandinėje eilutėje parašykite:
-```
-make
-```
-5. Paleiskite programą:
-```
-./programa
-```
-6. Paleidus programą, sekite jos nurodymus.
-7. Suvedus visus reikiamus duomenis, ekrane bus atspausdinti rezultatai.
