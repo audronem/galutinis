@@ -30,7 +30,7 @@ g++ -o <programos pavadinimas> <objektinio failo pavadinimas>.o <antro objektini
 ./<programos pavadinimas>
 ```
 
-#### 2 būdas (nuo v0.5):
+#### 2 būdas (nuo v0.5, jei turite GNU make):
 1 būdo 1-4 žingsniai;  
 5. Komandinėje eilutėje parašykite:
 ```
