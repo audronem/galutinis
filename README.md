@@ -41,6 +41,10 @@ make
 ./programa
 ```
 ## Naudojimas
+* [Tekstinių duomenų failų generavimas](#tekstinių-duomenų-failų-generavimas)
+* [Testavimas](#testavimas)
+* [Duomenų nuskaitymas iš failo](#duomenų-nuskaitymas-iš-failo)
+* [Duomenų įvedimas rankiniu būdu](#duomenų-įvedimas-rankiniu-būdu)
 ### Tekstinių duomenų failų generavimas
 ```
 Generuoti failus? | t/n
