@@ -1,10 +1,10 @@
 all: programa
 
-programa: v0.5.o funkcijos.o
-	g++ v0.5.o funkcijos.o -o programa
+programa: v1.0.o funkcijos.o
+	g++ v1.0.o funkcijos.o -o programa
 
-v0.5.o: v0.5.cpp
-	g++ -c v0.5.cpp
+v0.5.o: v1.0.cpp
+	g++ -c v1.0.cpp
 
 funkcijos.o: funkcijos.cpp
 	g++ -c funkcijos.cpp
