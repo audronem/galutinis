@@ -126,17 +126,12 @@ int main()
     }
     }
     }
-
-    if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
         for(size_t i=0; i<studentai.size(); i++){
             skaiciuotivid(&studentai[i]);
         }
-    }
-    else{
         for(size_t i=0; i<studentai.size(); i++){
             skaiciuotimed(&studentai[i]);
         }
-    }
     sort(studentai.begin(), studentai.end(), palyginimas);
     spausdinimas(studentai);
     return 0;
