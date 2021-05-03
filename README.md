@@ -15,7 +15,7 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 3. Atsidarykite komandinę eilutę.
 4. Pakeiskite savo direktoriją į .cpp failo direktoriją. Jei failas yra C disko "Downloads" aplanke, komanda atrodytų taip:
 ```
-cd 'C:/Users/<naudotojo vardas>/Downloads'
+cd C:/Users/<naudotojo vardas>/Downloads
 ```
 5. Jei pasirinkta versija turi kelis .cpp failus, sukompiliuokite objektinius kodus ir sulinkinkite juos:
 ```
