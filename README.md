@@ -5,7 +5,11 @@ Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzami
 ```
 Nuskaityti is failo? | t/n
 ```
-Jei naudotojas pasirenka duomenų nuskaitymą iš failo, programa automatiškai nuskaito duomenis, apskaičiuoja vidurkius ir komandinėje eilutėje atspausdina visų studentų rezultatus.
+Jei naudotojas pasirenka duomenų nuskaitymą iš failo, programa automatiškai nuskaito duomenis ir paklausia, kokiu būdu skaičiuoti pažymius – vidurkiais ar medianomis.
+```
+Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)
+```
+Pasirinkus taip arba ne, programa atspausdina atitinkamus rezultatus.
 
 ### Duomenų įvedimas rankiniu būdu
 Atsisakius vykdyti minėtas funkcijas, studentų duomenis bus prašoma įvesti rankiniu būdu – naudotojo bus prašoma įvesti studento vardą, pavardę bei pažymius:
@@ -44,9 +48,9 @@ Prideti dar viena studenta? | t/n
 Pasirinkus t, vėl atliekami tie patys veiksmai. Pasirinkus n, programa atspausdina studento duomenis ir vidurkius:
 ```
 n
-Vardas              Pavarde             Galutinis (vid.)    Galutinis (med.)    
---------------------------------------------------------------------------------
-Vardas              Pavarde             5.88                5.8
+Vardas              Pavarde             Galutinis   
+----------------------------------------------------
+Vardas              Pavarde             5.88        
 ```
 ##
 #### Versijos
