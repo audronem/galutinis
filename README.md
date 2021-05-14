@@ -1,6 +1,91 @@
 # Galutinio balo skaičiuoklė
 #### Programos veikimas
 Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzamino rezultatą, apskaičiuojami galutiniai balai.
+### Tekstinių duomenų failų generavimas
+```
+Generuoti failus? | t/n
+```
+
+Pasirinkus generuoti duomenų failus, naudotojo paprašoma įvesti generuojamų pažymių skaičių (įskaitant ir egzamino pažymį):
+```
+Iveskite pazymiu skaiciu:
+```
+
+Naudotojui įvedus norimą skaičių, pasiteiraujama, kiek įrašų (studentų) turi būti sugeneruota.  
+```
+1. 1000 irasu
+2. 10000 irasu
+3. 100000 irasu
+4. 1000000 irasu
+5. 10000000 irasu
+```
+
+Pasirinkus įrašų kiekį, programa pradeda generuoti duomenų failą.
+```
+3
+Generuojamas 100000 irasu failas...
+Generavimas uztruko 2.62263 s
+```
+
+### Testavimas
+```
+Tikrinti programos veikimo sparta? | t/n
+```
+Programa, gavusi atsakymą, pradeda vykdyti testavimą iš tekstinio failo:
+```
+t
+Skaitymas uztruko 0.671177s
+Rusiavimas uztruko 0.079814s
+Skirstymas uztruko 0.038897s
+```
+
+### Duomenų nuskaitymas iš failo
+```
+Nuskaityti is failo? | t/n
+```
+Jei naudotojas pasirenka duomenų nuskaitymą iš failo, programa automatiškai nuskaito duomenis, apskaičiuoja vidurkius ir komandinėje eilutėje atspausdina rezultatus.
+
+### Duomenų įvedimas rankiniu būdu
+Atsisakius vykdyti minėtas funkcijas, studentų duomenis bus prašoma įvesti rankiniu būdu – naudotojo bus prašoma įvesti studento vardą, pavardę bei pažymius:
+```
+Iveskite varda:
+Vardas
+Iveskite pavarde:
+Pavarde
+Ar pazymiu skaicius zinomas? | t/n
+```
+Jei naudotojas pasirenka t, prašoma įvesti pažymių skaičių:
+```
+Iveskite pazymiu skaiciu: 10
+```
+Paklausiama, ar generuoti atsitiktinius pažymius (jei naudotojas pasirenka negeneruoti pažymių, įveda juos pats):
+```
+Ar generuoti atsitiktinius pazymius? | t/n
+t
+Sugeneruoti pazymiai: 
+5
+7
+8
+3
+3
+5
+7
+5
+6
+8
+```
+Prašoma įvesti egzamino rezultatą, ir, gavus atsakymą, klausiama, ar naudotojas nori pridėti dar vieną studentą:
+```
+Iveskite egzamino rezultata: 6
+Prideti dar viena studenta? | t/n
+```
+Pasirinkus t, vėl atliekami tie patys veiksmai. Pasirinkus n, programa atspausdina studento duomenis ir vidurkius:
+```
+n
+Vardas              Pavarde             Galutinis (vid.)    Galutinis (med.)    
+--------------------------------------------------------------------------------
+Vardas              Pavarde             5.88                5.8
+```
 ##
 #### Versijos
 - [v0.1](https://github.com/audronem/galutinis/tree/v0.1)
