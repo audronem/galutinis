@@ -14,7 +14,8 @@ struct studentoinfo{
     string pavarde;
     int pazymiusk;
     double vid;
-    int gal;
+    double med;
+    double gal;
     int egz;
     int *P;
 };
@@ -67,33 +68,27 @@ double rastimediana(int* A, int dydis){
     return (double(A[(dydis-1)/2]+A[dydis/2])/2.0);
 }
 
-int galutinis(studentoinfo studentas){
-    int gal=(0.4*studentas.vid)+(0.6*studentas.egz);
-    return gal;
+void skaiciuotivid(studentoinfo* S, int dydis){
+    S->vid=0;
+    S->gal=0;
+    if(S->pazymiusk>0){
+                S->vid=rastividurki(S->P, S->pazymiusk);
+                S->gal=0.4*S->vid+0.6*S->egz;
+            }
 }
 
-void skaiciuotivid(studentoinfo* st){
-    st->vid=0;
-    st->gal=0;
-    if(st->pazymiusk>0){
-        st->vid=rastividurki(st->P, st->pazymiusk);
-    }
-    st->gal=0.4*st->vid+0.6*st->egz;
-}
-
-void skaiciuotimed(studentoinfo* st){
-    st->vid=0;
-    st->gal=0;
-    if(st->pazymiusk>0){
-        st->vid=rastimediana(st->P, st->pazymiusk);
-        st->gal=0.4*st->vid+0.6*st->egz;
-    }
+void skaiciuotimed(studentoinfo* S, int dydis){
+    S->med=0;
+    S->gal=0;
+    if(S->pazymiusk>0)
+            S->med=rastimediana(S->P, S->pazymiusk);
+            S->gal=0.4*S->med+0.6*S->egz;
 }
 
 void rez(studentoinfo* S){
     cout<<left<<setw(20)<<S->vardas;
     cout<<left<<setw(20)<<S->pavarde;
-    cout<<left<<setw(20)<<S->gal<<endl;
+    cout<<left<<setw(20)<<setprecision(3)<<S->gal<<endl;
 }
 
 void spausdinimas(studentoinfo* S, int n){
@@ -177,18 +172,6 @@ int main()
             }
         }
      else{
-        if(klausimas("Ar generuoti atsitiktinius pazymius?")){
-            while(!inputend){
-                int pazymys=atsitiktinis(pmin, pmax);
-                if((pazymys>pmax)||(pazymys<pmin)){
-                break;
-            }
-            else{
-                sekantis(st.P, st.pazymiusk, pazymys);
-            }
-            }
-        }
-        else{
             while(!inputend){
             cout<<"Iveskite pazymius (0, jei norite sustabdyti): ";
             int pazymys;
@@ -203,7 +186,6 @@ int main()
             else{
                 sekantis(st.P, st.pazymiusk, pazymys);
             }
-        }
         }
     }
     cout<<"Iveskite egzamino rezultata: ";
@@ -221,15 +203,13 @@ int main()
 
     if(klausimas("Ar skaiciuoti vidurkius? (Jei ne, bus skaiciuojamos medianos)")){
         for(int i=0; i<n; i++){
-            skaiciuotivid(&S[i]);
+            skaiciuotivid(&S[i], n);
         }
-
     }
     else{
         for(int i=0; i<n; i++){
-            skaiciuotimed(&S[i]);
+            skaiciuotimed(&S[i], n);
         }
-
     }
     spausdinimas(S, n);
     atlaisvinimas(S, n);
