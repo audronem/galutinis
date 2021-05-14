@@ -1,6 +1,9 @@
 # Galutinio balo skaičiuoklė
 #### Programos veikimas
 Naudotojui įvedus studentų vardus, pavardes, namų darbų pažymius bei egzamino rezultatą, apskaičiuojami galutiniai balai.
+## Naudojimas
+* [Duomenų nuskaitymas iš failo](#duomenų-nuskaitymas-iš-failo)
+* [Duomenų įvedimas rankiniu būdu](#duomenų-įvedimas-rankiniu-būdu)
 ### Duomenų nuskaitymas iš failo
 ```
 Nuskaityti is failo? | t/n
